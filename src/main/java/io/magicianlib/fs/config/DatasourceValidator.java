@@ -26,7 +26,7 @@ public class DatasourceValidator {
             System.out.println("✅ Driver: " + conn.getMetaData().getDriverName());
             System.out.println("✅ Version: " + conn.getMetaData().getDatabaseProductVersion());
         } catch (SQLException e) {
-            LOGGER.error("⚠️ Connect databases fault: {}", e.getMessage(), e);
+            LOGGER.error("⛔ Connect databases failure: {}", e.getMessage(), e);
             throw new RuntimeException(e);
         }
     }
