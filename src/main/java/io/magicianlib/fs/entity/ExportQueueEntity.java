@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
@@ -19,7 +20,8 @@ import java.time.OffsetDateTime;
 @Entity
 @Table(name = "export_queue", schema = "public")
 public class ExportQueueEntity implements Serializable {
-    private static final long serialVersionUID = -2381386325615267654L;
+    @Serial
+    private static final long serialVersionUID = 861001327915305997L;
     /**
      * 主键
      */
@@ -91,9 +93,9 @@ public class ExportQueueEntity implements Serializable {
     /**
      * 导出统计信息
      */
-    @Column(name = "stat_info")
+    @Column(name = "stats")
     @JdbcTypeCode(SqlTypes.JSON)
-    private ExportQueueEntityStats statInfo;
+    private ExportQueueEntityStats stats;
 
     /**
      * 开始执行时间
