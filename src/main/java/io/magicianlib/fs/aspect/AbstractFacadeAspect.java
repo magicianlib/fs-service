@@ -30,7 +30,7 @@ public abstract class AbstractFacadeAspect {
                 requestId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
                 request.setRequestId(requestId);
             }
-            MDC.put(Log.PREFIX, requestId);
+            MDC.put(Log.TRANCE_ID, requestId);
 
             AbstractResponse response = (AbstractResponse) joinPoint.proceed(new Object[]{request});
             if (response != null) {
