@@ -12,11 +12,10 @@ import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.slf4j.MDC;
-import org.springframework.core.Ordered;
 
 import java.util.UUID;
 
-public abstract class AbstractFacadeAspect implements Ordered {
+public abstract class AbstractFacadeAspect {
     protected static final Logger LOGGER = LogManager.getLogger(LoggingDirValidator.class);
 
     public abstract void executeFacade(AbstractRequest request);
