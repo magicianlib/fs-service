@@ -6,6 +6,8 @@ import io.magicianlib.fs.entity.ExportQueueEntity;
 import io.magicianlib.fs.entity.QExportQueueEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
 public class CustomExportQueueEntityRepositoryImpl implements CustomExportQueueEntityRepository<ExportQueueEntity, Long> {
 
@@ -19,7 +21,7 @@ public class CustomExportQueueEntityRepositoryImpl implements CustomExportQueueE
     public int updateByExample() {
         QExportQueueEntity entity = QExportQueueEntity.exportQueueEntity;
 
-        ExportQueueEntity record = jpaQueryFactory.selectFrom(entity).where(entity.id.eq(10L)).fetchOne();
+        ExportQueueEntity record = jpaQueryFactory.selectFrom(entity).where(entity.id.eq(UUID.randomUUID())).fetchOne();
 
         BooleanBuilder condition = new BooleanBuilder();
         condition.or(condition.or(entity.bizType.eq("")));
