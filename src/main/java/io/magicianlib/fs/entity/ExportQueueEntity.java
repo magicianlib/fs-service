@@ -1,15 +1,21 @@
 package io.magicianlib.fs.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 /**
  * 导出队列
@@ -18,17 +24,18 @@ import java.time.OffsetDateTime;
 @Setter
 @Accessors(chain = true)
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "export_queue", schema = "public")
 public class ExportQueueEntity implements Serializable {
     @Serial
-    private static final long serialVersionUID = 861001327915305997L;
+    private static final long serialVersionUID = -4821162522775948414L;
     /**
      * 主键
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private UUID id;
 
     /**
      * 用户
