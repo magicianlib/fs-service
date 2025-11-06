@@ -5,7 +5,7 @@ import io.magicianlib.fs.constants.Log;
 import io.magicianlib.fs.exception.BizArgumentException;
 import io.magicianlib.fs.exception.BizException;
 import io.magicianlib.fs.request.AbstractRequest;
-import io.magicianlib.fs.response.AbstractResponse;
+import io.magicianlib.fs.result.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,19 +25,22 @@ public abstract class AbstractFacadeAspect {
         try {
             preProceed(joinPoint, request);
 
-            String requestId = request.getRequestId();
-            if (StringUtils.isBlank(requestId)) {
-                requestId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
-                request.setRequestId(requestId);
+            String traceId = request.getTraceId();
+            if (StringUtils.isBlank(traceId)) {
+                traceId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
+                request.setTraceId(traceId);
             }
-            MDC.put(Log.TRANCE_ID, requestId);
+            MDC.put(Log.TRANCE_ID, traceId);
 
-            AbstractResponse response = (AbstractResponse) joinPoint.proceed(new Object[]{request});
-            if (response != null) {
-                postProceed(joinPoint, request, response);
+            Result<?> result = (Result<?>) joinPoint.proceed(new Object[]{request});
+            if (result != null) {
+                if (StringUtils.isBlank(result.getTraceId())) {
+                    result.setTraceId(traceId);
+                }
+                postProceed(joinPoint, request, result);
             }
 
-            return response;
+            return result;
         } catch (BizArgumentException e) {
             LOGGER.error("请求参数异常：{}", e.getMessage(), e);
             throw e;
@@ -52,6 +55,6 @@ public abstract class AbstractFacadeAspect {
     protected void preProceed(ProceedingJoinPoint joinPoint, AbstractRequest request) {
     }
 
-    protected void postProceed(ProceedingJoinPoint joinPoint, AbstractRequest request, AbstractResponse response) {
+    protected void postProceed(ProceedingJoinPoint joinPoint, AbstractRequest request, Result<?> result) {
     }
 }

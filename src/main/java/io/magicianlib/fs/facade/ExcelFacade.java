@@ -1,8 +1,8 @@
 package io.magicianlib.fs.facade;
 
 import io.magicianlib.fs.request.PageExcelListRequest;
-import io.magicianlib.fs.response.PageExcelListResponse;
+import io.magicianlib.fs.result.PageResult;
 
 public interface ExcelFacade {
-    PageExcelListResponse page(PageExcelListRequest request);
+    PageResult<?> page(PageExcelListRequest request);
 }

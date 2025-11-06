@@ -7,7 +7,7 @@ public abstract class AbstractRequest extends PrintFriendliness {
     }
 
     private String appId;
-    private String requestId;
+    private String traceId;
     private boolean needLog = true;
 
     public String getAppId() {
@@ -18,12 +18,12 @@ public abstract class AbstractRequest extends PrintFriendliness {
         this.appId = appId;
     }
 
-    public String getRequestId() {
-        return requestId;
+    public String getTraceId() {
+        return traceId;
     }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     public boolean isNeedLog() {
