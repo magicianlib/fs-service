@@ -93,7 +93,7 @@
             <version>${querydsl.version}</version>
             <classifier>jakarta</classifier>
         </dependency>
-        <!-- 生成 Q 类的注解处理器 -->
+        <!-- QueryDSL 生成 Q 类注解处理器 -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
@@ -171,6 +171,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <!-- 指定注解处理器依赖, 编译时使用如下依赖生成代码 -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
