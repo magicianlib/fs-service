@@ -78,7 +78,7 @@ public enum JacksonXmlUtils {
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, includeDeclaration);
 
         // 忽略未知字段
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         // 序列化时忽略空值
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
